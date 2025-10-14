@@ -25,7 +25,6 @@ public class OptionsParser {
                 case "b" -> moves[i++] = MoveDirection.BACKWARD;
                 case "l" -> moves[i++] = MoveDirection.LEFT;
                 case "r" -> moves[i++] = MoveDirection.RIGHT;
-                default -> throw new IllegalStateException("Unreachable");
             }
         }
         return moves;
