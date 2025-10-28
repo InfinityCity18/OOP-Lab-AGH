@@ -1,29 +1,26 @@
 package agh.ics.oop;
 
+import agh.ics.oop.model.Animal;
 import agh.ics.oop.model.MapDirection;
 import agh.ics.oop.model.MoveDirection;
 import agh.ics.oop.model.Vector2d;
 
 import agh.ics.oop.OptionsParser;
 
-public class World {
-//    public static void main(String[] args) {
-//        System.out.println("system wystartował");
-//        run(OptionsParser.parseMoves(args));
-//        System.out.println("system zakończył działanie");
-//    }
-    public static void main(String[] args) {
-        Vector2d position1 = new Vector2d(1,2);
-        System.out.println(position1);
-        Vector2d position2 = new Vector2d(-2,1);
-        System.out.println(position2);
-        System.out.println(position1.add(position2));
+import java.util.List;
 
-        System.out.println(MapDirection.NORTH.next());
-        System.out.println(MapDirection.NORTH.previous());
-        System.out.println(MapDirection.NORTH.toUnitVector());
-        System.out.println(MapDirection.NORTH.toString());
+public class World {
+    public static void main(String[] args) {
+        List<MoveDirection> directions = OptionsParser.parseMoves(args);
+        List<Vector2d> positions = List.of(new Vector2d(2, 2), new Vector2d(3, 4));
+        Simulation simulation = new Simulation(positions, directions);
+        simulation.run();
     }
+//    public static void main(String[] args) {
+//        Vector2d position1 = new Vector2d(1,2);
+//        Animal animal1 = new Animal(position1);
+//        System.out.println(animal1);
+//    }
 
 //    public static void run() {
 //        System.out.println("zwierzak idzie do przodu");
