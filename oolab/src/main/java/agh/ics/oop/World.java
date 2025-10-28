@@ -6,6 +6,7 @@ import agh.ics.oop.model.MoveDirection;
 import agh.ics.oop.model.Vector2d;
 
 import agh.ics.oop.OptionsParser;
+import agh.ics.oop.Simulation;
 
 import java.util.List;
 

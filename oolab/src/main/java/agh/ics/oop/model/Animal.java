@@ -20,8 +20,8 @@ public class Animal {
 
     public void move(MoveDirection direction) {
         switch (direction) {
-            case MoveDirection.LEFT -> this.world_dir = this.world_dir.next();
-            case MoveDirection.RIGHT -> this.world_dir = this.world_dir.previous();
+            case MoveDirection.LEFT -> this.world_dir = this.world_dir.previous();
+            case MoveDirection.RIGHT -> this.world_dir = this.world_dir.next();
             case MoveDirection.FORWARD -> {
                 switch (this.world_dir) {
                     case NORTH -> this.pos.y = Math.clamp(this.pos.y + 1, MAP_BOUNDARY_1, MAP_BOUNDARY_2);
@@ -44,6 +44,14 @@ public class Animal {
     @Override
     public String toString() {
         return "Orientacja: " + this.world_dir + ", Położenie: " + this.pos;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Animal animal = (Animal) o;
+        return this.pos.equals(animal.pos) && this.world_dir == animal.world_dir;
     }
 
     public boolean isAt(Vector2d position) {

@@ -12,11 +12,15 @@ public class Simulation {
     private List<MoveDirection> moves;
 
     public Simulation(List<Vector2d> init_positions, List<MoveDirection> moves) {
-        moves = moves;
+        this.moves = moves;
         animals = new ArrayList<>();
         for (Vector2d position : init_positions) {
             animals.add(new Animal(position));
         }
+    }
+
+    public Animal getAnimal(int index) {
+        return this.animals.get(index);
     }
 
     public void run() {
@@ -26,7 +30,7 @@ public class Simulation {
         for (MoveDirection move: this.moves) {
             Animal animal = this.animals.get(counter % mod);
             animal.move(move);
-            System.out.println("Zwierzak: " + counter % mod + ": " + animal.toString() );
+            System.out.println("Zwierzak: " + counter % mod + ": " + animal );
             counter++;
         }
 
