@@ -18,7 +18,7 @@ public class SimulationTest {
         Simulation simulation = new Simulation(positions, directions, worldMap);
         simulation.run();
         Animal animal_0 = simulation.getAnimal(0);
-        assertTrue(animal_0.getDir().equals(MapDirection.SOUTH) && animal_0.getPos().equals(new Vector2d(0, 2)));
+        assertTrue(animal_0.getDir().equals(MapDirection.SOUTH) && animal_0.getPosition().equals(new Vector2d(0, 2)));
     }
 
     @Test
@@ -33,8 +33,8 @@ public class SimulationTest {
         simulation.run();
         Animal animal_exp1 = simulation.getAnimal(0);
         Animal animal_exp2 = simulation.getAnimal(1);
-        assertTrue(animal_exp1.getDir().equals(MapDirection.SOUTH) && animal_exp1.getPos().equals(new Vector2d(0, 1)));
-        assertTrue(animal_exp2.getDir().equals(MapDirection.SOUTH) && animal_exp2.getPos().equals(new Vector2d(3, 1)));
+        assertTrue(animal_exp1.getDir().equals(MapDirection.SOUTH) && animal_exp1.getPosition().equals(new Vector2d(0, 1)));
+        assertTrue(animal_exp2.getDir().equals(MapDirection.SOUTH) && animal_exp2.getPosition().equals(new Vector2d(3, 1)));
     }
 
     @Test
@@ -49,8 +49,8 @@ public class SimulationTest {
         simulation.run();
         Animal animal_exp1 = simulation.getAnimal(0);
         Animal animal_exp2 = simulation.getAnimal(1);
-        assertTrue(animal_exp1.getDir().equals(MapDirection.SOUTH) && animal_exp1.getPos().equals(new Vector2d(0, 1)));
-        assertTrue(animal_exp2.getDir().equals(MapDirection.SOUTH) && animal_exp2.getPos().equals(new Vector2d(3, 2)));
+        assertTrue(animal_exp1.getDir().equals(MapDirection.SOUTH) && animal_exp1.getPosition().equals(new Vector2d(0, 1)));
+        assertTrue(animal_exp2.getDir().equals(MapDirection.SOUTH) && animal_exp2.getPosition().equals(new Vector2d(3, 2)));
     }
 
     @Test
@@ -65,8 +65,8 @@ public class SimulationTest {
         simulation.run();
         Animal animal_exp1 = simulation.getAnimal(0);
         Animal animal_exp2 = simulation.getAnimal(1);
-        assertTrue(animal_exp1.getDir().equals(MapDirection.NORTH) && animal_exp1.getPos().equals(new Vector2d(1, 1)));
-        assertTrue(animal_exp2.getDir().equals(MapDirection.NORTH) && animal_exp2.getPos().equals(new Vector2d(2, 1)));
+        assertTrue(animal_exp1.getDir().equals(MapDirection.NORTH) && animal_exp1.getPosition().equals(new Vector2d(1, 1)));
+        assertTrue(animal_exp2.getDir().equals(MapDirection.NORTH) && animal_exp2.getPosition().equals(new Vector2d(2, 1)));
     }
 
     @Test
@@ -107,6 +107,6 @@ public class SimulationTest {
         simulation.run();
         Animal animal_0 = simulation.getAnimal(0);
         assertTrue(simulation.getAnimals().size() == 1);
-        assertTrue(animal_0.getDir().equals(MapDirection.NORTH) && animal_0.getPos().equals(new Vector2d(1, 2)));
+        assertTrue(animal_0.getDir().equals(MapDirection.NORTH) && animal_0.getPosition().equals(new Vector2d(1, 2)));
     }
 }
