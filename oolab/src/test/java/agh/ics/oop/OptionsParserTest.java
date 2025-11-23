@@ -1,6 +1,7 @@
 package agh.ics.oop;
 
 import agh.ics.oop.model.MoveDirection;
+import agh.ics.oop.model.exceptions.IncorrectPositionException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -31,10 +32,10 @@ public class OptionsParserTest {
     @Test
     public void parse_test3() {
         String[] args = {"f", "wahuabb", "iawhiahwoiahil", "l"};
-        List<MoveDirection> moves = OptionsParser.parseMoves(args);
-        assertEquals(Arrays.asList(new MoveDirection[]{
-                MoveDirection.FORWARD,
-                MoveDirection.LEFT
-        }), moves);
+        try {
+            List<MoveDirection> moves = OptionsParser.parseMoves(args);
+            fail();
+        }  catch (IllegalArgumentException _) {
+        }
     }
 }

@@ -1,6 +1,7 @@
 package agh.ics.oop;
 
 import agh.ics.oop.model.*;
+import agh.ics.oop.model.exceptions.IncorrectPositionException;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -39,18 +40,24 @@ public class SimulationTest {
 
     @Test
     public void TestBasicTwoButLastBadArg() {
-        List<MoveDirection> directions = OptionsParser.parseMoves(
-                new String[] {"f","f", "f", "f", "f", "f", "l", "r", "f", "f", "l", "r", "b", "b", "f", "f", "b", "b", "f", "f", "f", "fuwahuiahiuwhauihu"}
-        );
-        List<Vector2d> positions = List.of(new Vector2d(1, 1), new Vector2d(2, 1));
-        RectangularMap worldMap = new RectangularMap(7,4);
+        try {
+            List<MoveDirection> directions = OptionsParser.parseMoves(
+                    new String[]{"f", "f", "f", "f", "f", "f", "l", "r", "f", "f", "l", "r", "b", "b", "f", "f", "b", "b", "f", "f", "f", "fuwahuiahiuwhauihu"}
+            );
+            fail(); //spodziewamy sie wyjatku
+        } catch (IllegalArgumentException e) {
 
-        Simulation simulation = new Simulation(positions, directions,  worldMap);
-        simulation.run();
-        Animal animal_exp1 = simulation.getAnimal(0);
-        Animal animal_exp2 = simulation.getAnimal(1);
-        assertTrue(animal_exp1.getDir().equals(MapDirection.SOUTH) && animal_exp1.getPosition().equals(new Vector2d(0, 1)));
-        assertTrue(animal_exp2.getDir().equals(MapDirection.SOUTH) && animal_exp2.getPosition().equals(new Vector2d(3, 2)));
+        }
+        return;
+//        List<Vector2d> positions = List.of(new Vector2d(1, 1), new Vector2d(2, 1));
+//        RectangularMap worldMap = new RectangularMap(7,4);
+//
+//        Simulation simulation = new Simulation(positions, directions,  worldMap);
+//        simulation.run();
+//        Animal animal_exp1 = simulation.getAnimal(0);
+//        Animal animal_exp2 = simulation.getAnimal(1);
+//        assertTrue(animal_exp1.getDir().equals(MapDirection.SOUTH) && animal_exp1.getPosition().equals(new Vector2d(0, 1)));
+//        assertTrue(animal_exp2.getDir().equals(MapDirection.SOUTH) && animal_exp2.getPosition().equals(new Vector2d(3, 2)));
     }
 
     @Test
@@ -71,28 +78,36 @@ public class SimulationTest {
 
     @Test
     public void TestNoAnimals() {
-        List<MoveDirection> directions = OptionsParser.parseMoves(
-                new String[] {"f", "b", "l", "wjaiwhjia", "jwoajoai", "w", "b"}
-        );
-        List<Vector2d> positions = List.of();
-        RectangularMap worldMap = new RectangularMap(7,4);
+        try {
+            List<MoveDirection> directions = OptionsParser.parseMoves(
+                    new String[]{"f", "b", "l", "b"}
+            );
+            List<Vector2d> positions = List.of();
+            RectangularMap worldMap = new RectangularMap(6,4);
 
-        Simulation simulation = new Simulation(positions, directions,  worldMap);
-        simulation.run();
-        assertTrue(simulation.getAnimals().isEmpty());
+            Simulation simulation = new Simulation(positions, directions,  worldMap);
+            simulation.run();
+            assertTrue(simulation.getAnimals().isEmpty());
+        } catch (IllegalArgumentException e) {
+            fail();
+        }
     }
 
     @Test
     public void Test0x0map() {
-        List<MoveDirection> directions = OptionsParser.parseMoves(
-                new String[] {"f", "b", "l", "wjaiwhjia", "jwoajoai", "w", "b"}
-        );
-        List<Vector2d> positions = List.of(new Vector2d(0, 0));
-        RectangularMap worldMap = new RectangularMap(0,0);
+        try {
+            List<MoveDirection> directions = OptionsParser.parseMoves(
+                    new String[]{"f", "b", "l", "w", "b"}
+            );
+            List<Vector2d> positions = List.of(new Vector2d(0, 0));
+            RectangularMap worldMap = new RectangularMap(0,0);
 
-        Simulation simulation = new Simulation(positions, directions,  worldMap);
-        simulation.run();
-        assertTrue(simulation.getAnimals().isEmpty());
+            Simulation simulation = new Simulation(positions, directions,  worldMap);
+            simulation.run();
+            fail();
+        } catch (IllegalArgumentException e) {
+
+        }
     }
 
     @Test

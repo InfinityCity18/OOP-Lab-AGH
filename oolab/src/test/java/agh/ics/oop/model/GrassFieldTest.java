@@ -1,5 +1,6 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.model.exceptions.IncorrectPositionException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,7 +10,11 @@ public class GrassFieldTest {
     void placeTest() {
         GrassField map = new GrassField(10);;
         Vector2d pos = new Vector2d(2,3);
-        map.place(new Animal(pos));
+        try {
+            map.place(new Animal(pos)); //musi sie udac, miejsce jest wolne
+        } catch (IncorrectPositionException e) {
+            fail();
+        }
         assertTrue(map.isOccupied(pos));
     }
 
@@ -19,7 +24,11 @@ public class GrassFieldTest {
         Vector2d pos = new Vector2d(2,3);
         Vector2d pos2 = new Vector2d(2,4);
         Animal animal = new Animal(pos);
-        map.place(animal);
+        try {
+            map.place(animal); //musi sie udac, miejsce jest wolne
+        } catch (IncorrectPositionException e) {
+            fail();
+        }
         map.move(animal, MoveDirection.FORWARD);
         assertTrue(map.isOccupied(pos2));
     }
@@ -35,7 +44,11 @@ public class GrassFieldTest {
         RectangularMap map = new RectangularMap(6,6);;
         Vector2d pos = new Vector2d(2,3);
         Animal animal = new Animal(pos);
-        map.place(animal);
+        try {
+            map.place(animal);
+        }  catch (IncorrectPositionException e) {
+            fail();
+        }
         assertFalse(map.canMoveTo(pos));
     }
 }

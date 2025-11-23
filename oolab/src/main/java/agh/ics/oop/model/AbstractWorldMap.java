@@ -1,5 +1,6 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.model.exceptions.IncorrectPositionException;
 import agh.ics.oop.model.util.MapVisualizer;
 
 import java.util.ArrayList;
@@ -8,22 +9,21 @@ import java.util.List;
 import java.util.Map;
 
 abstract class AbstractWorldMap implements WorldMap {
-    protected Vector2d bot_left;
-    protected Vector2d top_right;
+    protected ArrayList<MapChangeListener> observers = new ArrayList<>();
+    protected Boundary bounds;
     protected Map<Vector2d, Animal> animal_map;
 
     AbstractWorldMap(Vector2d botLeft, Vector2d topRight) {
-        bot_left = botLeft;
-        top_right = topRight;
+        bounds = new Boundary(botLeft, topRight);
         animal_map = new HashMap<>();
     }
 
-    public boolean place(Animal animal) {
+    public void place(Animal animal) throws IncorrectPositionException {
         if (canMoveTo(animal.getPosition())) {
             this.animal_map.put(animal.getPosition(), animal);
-            return true;
+            this.mapChanged("Placed an animal at %s".formatted(animal.getPosition()));
         } else {
-            return false;
+            throw new IncorrectPositionException(animal.getPosition());
         }
     }
 
@@ -32,6 +32,7 @@ abstract class AbstractWorldMap implements WorldMap {
             animal_map.remove(animal.getPosition(), animal);
             animal.move(direction, this);
             animal_map.put(animal.getPosition(), animal);
+            this.mapChanged("Moved an animal to %s".formatted(animal.getPosition()));
         }
     }
 
@@ -45,12 +46,31 @@ abstract class AbstractWorldMap implements WorldMap {
         return new ArrayList<>(this.animal_map.values());
     }
 
+    public Boundary getCurrentBounds() {
+        return this.bounds;
+    }
+
     public boolean isOccupied(Vector2d position) {
         return this.animal_map.containsKey(position);
     }
 
     public String toString() {
         MapVisualizer visualizer = new MapVisualizer(this);
-        return visualizer.draw(this.bot_left, this.top_right);
+        Boundary bounds = this.getCurrentBounds();
+        return visualizer.draw(bounds.bot_left(), bounds.top_right());
+    }
+
+    public void registerObserver(MapChangeListener observer) {
+        this.observers.add(observer);
+    }
+
+    public void unregisterObserver(MapChangeListener observer) {
+        this.observers.remove(observer);
+    }
+
+    public void mapChanged(String message) {
+        for (MapChangeListener observer : observers) {
+            observer.mapChanged(this, message);
+        }
     }
 }
