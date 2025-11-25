@@ -5,11 +5,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class Vector2dTest {
     @Test
-    public void testEquals() {
+    public void testEquals1() {
         Vector2d a = new Vector2d(1, 3);
         Vector2d b = new Vector2d(1, 3);
         assertEquals(a, b);
         a = new Vector2d(2, -3);
+        b = new Vector2d(1, -3);
+        assertNotEquals(a, b);
+        a = new Vector2d(1, -2);
+        b = new Vector2d(1, -3);
+        assertNotEquals(a, b);
+        a = new Vector2d(3, -2);
         b = new Vector2d(1, -3);
         assertNotEquals(a, b);
     }

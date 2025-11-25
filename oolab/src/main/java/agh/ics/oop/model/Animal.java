@@ -2,9 +2,6 @@ package agh.ics.oop.model;
 
 public class Animal {
 
-    private static final int MAP_BOUNDARY_1 = 0;
-    private static final int MAP_BOUNDARY_2 = 4;
-
     private MapDirection world_dir;
     private Vector2d pos;
 
@@ -18,32 +15,32 @@ public class Animal {
         this.world_dir = MapDirection.NORTH;
     }
 
-    public void move(MoveDirection direction) {
+    public Vector2d getPos() {
+        return this.pos;
+    }
+
+    public MapDirection getDir() {
+        return this.world_dir;
+    }
+
+    public void move(MoveDirection direction, MoveValidator validator) {
         switch (direction) {
             case MoveDirection.LEFT -> this.world_dir = this.world_dir.previous();
             case MoveDirection.RIGHT -> this.world_dir = this.world_dir.next();
             case MoveDirection.FORWARD -> {
-                switch (this.world_dir) {
-                    case NORTH -> this.pos.y = Math.clamp(this.pos.y + 1, MAP_BOUNDARY_1, MAP_BOUNDARY_2);
-                    case SOUTH -> this.pos.y = Math.clamp(this.pos.y - 1, MAP_BOUNDARY_1, MAP_BOUNDARY_2);
-                    case EAST -> this.pos.x = Math.clamp(this.pos.x + 1, MAP_BOUNDARY_1, MAP_BOUNDARY_2);
-                    case WEST -> this.pos.x =Math.clamp(this.pos.x - 1, MAP_BOUNDARY_1, MAP_BOUNDARY_2);
-                }
+                Vector2d newPosition = this.pos.add(this.world_dir.toUnitVector());
+                if (validator.canMoveTo(newPosition)) this.pos = newPosition;
             }
             case MoveDirection.BACKWARD -> {
-                switch (this.world_dir) {
-                    case NORTH -> this.pos.y = Math.clamp(this.pos.y - 1, MAP_BOUNDARY_1, MAP_BOUNDARY_2);
-                    case SOUTH -> this.pos.y = Math.clamp(this.pos.y + 1, MAP_BOUNDARY_1, MAP_BOUNDARY_2);
-                    case EAST -> this.pos.x = Math.clamp(this.pos.x - 1, MAP_BOUNDARY_1, MAP_BOUNDARY_2);
-                    case WEST -> this.pos.x =Math.clamp(this.pos.x + 1, MAP_BOUNDARY_1, MAP_BOUNDARY_2);
-                }
+                Vector2d newPosition = this.pos.subtract(this.world_dir.toUnitVector());
+                if (validator.canMoveTo(newPosition)) this.pos = newPosition;
             }
         }
     }
 
     @Override
     public String toString() {
-        return "Orientacja: " + this.world_dir + ", Położenie: " + this.pos;
+        return this.world_dir.toString();
     }
 
     @Override
