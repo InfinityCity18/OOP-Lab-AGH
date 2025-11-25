@@ -9,10 +9,10 @@ public class RectangularMap extends AbstractWorldMap {
     public final int width;
     public final int height;
 
-    public RectangularMap(int width, int height) {
+    public RectangularMap(int width, int height, int id) {
         Vector2d bot_left = new Vector2d(0,0);
         Vector2d top_right = new Vector2d(width - 1, height - 1);
-        super(bot_left, top_right);
+        super(bot_left, top_right, id);
         this.width = width;
         this.height = height;
     }

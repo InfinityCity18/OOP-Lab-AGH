@@ -45,19 +45,9 @@ public class SimulationTest {
                     new String[]{"f", "f", "f", "f", "f", "f", "l", "r", "f", "f", "l", "r", "b", "b", "f", "f", "b", "b", "f", "f", "f", "fuwahuiahiuwhauihu"}
             );
             fail(); //spodziewamy sie wyjatku
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException _) {
 
         }
-        return;
-//        List<Vector2d> positions = List.of(new Vector2d(1, 1), new Vector2d(2, 1));
-//        RectangularMap worldMap = new RectangularMap(7,4);
-//
-//        Simulation simulation = new Simulation(positions, directions,  worldMap);
-//        simulation.run();
-//        Animal animal_exp1 = simulation.getAnimal(0);
-//        Animal animal_exp2 = simulation.getAnimal(1);
-//        assertTrue(animal_exp1.getDir().equals(MapDirection.SOUTH) && animal_exp1.getPosition().equals(new Vector2d(0, 1)));
-//        assertTrue(animal_exp2.getDir().equals(MapDirection.SOUTH) && animal_exp2.getPosition().equals(new Vector2d(3, 2)));
     }
 
     @Test

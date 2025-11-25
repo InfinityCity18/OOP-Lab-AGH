@@ -8,8 +8,8 @@ import java.util.*;
 public class GrassField extends AbstractWorldMap {
     private Map<Vector2d, Grass> grass_map;
 
-    public GrassField(int n_fields) {
-        super(new Vector2d(0,0), new Vector2d(0,0));
+    public GrassField(int n_fields, int id) {
+        super(new Vector2d(0,0), new Vector2d(0,0), id);
         this.grass_map = new HashMap<>();
 
         RandomPositionGenerator randomPositionGenerator = new RandomPositionGenerator( (int) Math.sqrt(10 * n_fields), (int) Math.sqrt(10 * n_fields), n_fields);

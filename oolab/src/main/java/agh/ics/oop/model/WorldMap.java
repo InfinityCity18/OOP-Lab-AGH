@@ -38,6 +38,8 @@ public interface WorldMap extends MoveValidator {
      */
     boolean isOccupied(Vector2d position);
 
+    int getId();
+
     List<WorldElement> getElements();
 
     /**
