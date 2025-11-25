@@ -13,18 +13,19 @@ public class World {
         ConsoleMapDisplay observer = new ConsoleMapDisplay();
         List<MoveDirection> directions = OptionsParser.parseMoves(args);
         List<Vector2d> positions = List.of(new Vector2d(2, 2), new Vector2d(3, 4));
-        GrassField grassMap = new GrassField(10, 1);
-        RectangularMap rectMap = new RectangularMap(10, 6, 2);
-        rectMap.registerObserver(observer);
-        grassMap.registerObserver(observer);
-        Simulation simulation_grass = new Simulation(positions, directions, grassMap);
-        Simulation simulation_rect = new Simulation(positions, directions, rectMap);
         ArrayList<Simulation> simulations = new ArrayList<>();
-        simulations.add(simulation_grass);
-        simulations.add(simulation_rect);
+        for (int i = 0; i< 1000; i++) {
+            GrassField grassMap = new GrassField(10, 1000 + i);
+            RectangularMap rectMap = new RectangularMap(10, 6, i);
+            rectMap.registerObserver(observer);
+            grassMap.registerObserver(observer);
+            Simulation simulation_grass = new Simulation(positions, directions, grassMap);
+            Simulation simulation_rect = new Simulation(positions, directions, rectMap);
+            simulations.add(simulation_grass);
+            simulations.add(simulation_rect);
+        }
         SimulationEngine sim_engine = new SimulationEngine(simulations);
-        sim_engine.runAsync();
-        sim_engine.awaitSimulationsEnd();
+        sim_engine.runAsyncInThreadPool();
         System.out.println("System zakonczyl dzialanie");
     }
 }
