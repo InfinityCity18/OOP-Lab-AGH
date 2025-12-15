@@ -1,5 +1,6 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.model.exceptions.IncorrectPositionException;
 import agh.ics.oop.model.util.MapVisualizer;
 
 import java.util.*;
@@ -19,18 +20,14 @@ public class GrassField extends AbstractWorldMap {
     }
 
     public void updateBounds(Vector2d pos) {
-        bot_left = bot_left.lowerLeft(pos);
-        top_right = top_right.upperRight(pos);
+        Boundary oldBounds = this.getCurrentBounds();
+        this.bounds = new Boundary(oldBounds.bot_left().lowerLeft(pos), oldBounds.top_right().upperRight(pos));
     }
 
     @Override
-    public boolean place(Animal animal) {
-        if (super.place(animal)) {
-            updateBounds(animal.getPosition());
-            return true;
-        } else {
-            return false;
-        }
+    public void place(Animal animal) throws IncorrectPositionException {
+        super.place(animal);
+        updateBounds(animal.getPosition());
     }
 
     @Override

@@ -28,6 +28,7 @@ public class RectangularMap extends AbstractWorldMap {
 
     @Override
     public boolean canMoveTo(Vector2d position) {
-        return position.follows(bot_left) && position.precedes(top_right) && super.canMoveTo(position);
+        Boundary bounds = this.getCurrentBounds();
+        return position.follows(bounds.bot_left()) && position.precedes(bounds.top_right()) && super.canMoveTo(position);
     }
 }

@@ -9,9 +9,11 @@ import java.util.List;
 
 public class World {
     public static void main(String[] args) {
+        ConsoleMapDisplay observer = new ConsoleMapDisplay();
         List<MoveDirection> directions = OptionsParser.parseMoves(args);
         List<Vector2d> positions = List.of(new Vector2d(2, 2), new Vector2d(3, 4));
         GrassField worldMap = new GrassField(10);
+        worldMap.registerObserver(observer);
         Simulation simulation = new Simulation(positions, directions, worldMap);
         simulation.run();
     }
