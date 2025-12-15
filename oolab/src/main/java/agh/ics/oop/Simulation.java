@@ -44,7 +44,7 @@ public class Simulation implements Runnable {
 
         for (MoveDirection move: this.moves) {
             try {
-                Thread.sleep(800);
+                Thread.sleep(400);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

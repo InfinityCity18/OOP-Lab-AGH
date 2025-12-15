@@ -23,7 +23,7 @@
         </VBox>
     </top>
     <center>
-        <Label fx:id="infoLabel" text="All animals will be living here!" textAlignment="CENTER"/>
+        <Canvas fx:id="mapGrid" width="800" height="800"/>
     </center>
     <bottom>
        <HBox alignment="CENTER">

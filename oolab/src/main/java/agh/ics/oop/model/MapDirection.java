@@ -36,10 +36,10 @@ public enum MapDirection {
     @Override
     public String toString() {
         return switch(this) {
-            case NORTH -> "N";
-            case EAST -> "E";
-            case SOUTH -> "S";
-            case WEST -> "W";
+            case NORTH -> "↑";
+            case EAST -> "→";
+            case SOUTH -> "↓";
+            case WEST -> "←";
         };
     }
 
