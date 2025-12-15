@@ -15,17 +15,12 @@ import java.util.List;
 
 public class SimulationApp extends Application {
     public void start(Stage primaryStage) throws Exception {
-        RectangularMap map = new RectangularMap(8, 10, 1);
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getClassLoader().getResource("simulation.fxml"));
         BorderPane viewRoot = loader.load();
-        SimulationPresenter presenter = loader.getController();
-        presenter.setWorldMap(map);
-        map.registerObserver(presenter);
 
-        map.place(new Animal(new Vector2d(0, 3)));
-        map.place(new Animal(new Vector2d(0, 1)));
+        SimulationPresenter presenter = loader.getController();
 
         configureStage(primaryStage, viewRoot);
         primaryStage.show();

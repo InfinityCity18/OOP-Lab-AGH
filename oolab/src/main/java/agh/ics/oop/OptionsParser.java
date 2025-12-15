@@ -8,6 +8,7 @@ import java.util.List;
 public class OptionsParser {
     public static List<MoveDirection> parseMoves(String[] args) throws IllegalArgumentException {
         List<MoveDirection> moves = new ArrayList<MoveDirection>();
+        System.out.println(moves);
         for (String arg : args) {
             switch (arg) {
                 case "f" -> moves.add(MoveDirection.FORWARD);
