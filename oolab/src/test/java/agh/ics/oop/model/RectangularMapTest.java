@@ -8,7 +8,7 @@ public class RectangularMapTest {
 
     @Test
     void placeTest() {
-        RectangularMap map = new RectangularMap(6,6);;
+        RectangularMap map = new RectangularMap(6,6, 1);;
         Vector2d pos = new Vector2d(2,3);
         try {
         map.place(new Animal(pos));
@@ -20,7 +20,7 @@ public class RectangularMapTest {
 
     @Test
     void moveTest() {
-        RectangularMap map = new RectangularMap(6,6);;
+        RectangularMap map = new RectangularMap(6,6, 1);;
         Vector2d pos = new Vector2d(2,3);
         Vector2d pos2 = new Vector2d(2,4);
         Animal animal = new Animal(pos);
@@ -35,13 +35,13 @@ public class RectangularMapTest {
 
     @Test
     void objectAtTest() {
-        RectangularMap map = new RectangularMap(6,6);;
+        RectangularMap map = new RectangularMap(6,6, 1);;
         assertNull(map.objectAt(new Vector2d(2,3)));
     }
 
     @Test
     void canMoveToTest() {
-        RectangularMap map = new RectangularMap(6,6);;
+        RectangularMap map = new RectangularMap(6,6, 1);;
         Vector2d pos = new Vector2d(2,3);
         Animal animal = new Animal(pos);
         try {

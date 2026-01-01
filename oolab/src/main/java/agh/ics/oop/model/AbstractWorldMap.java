@@ -12,8 +12,10 @@ abstract class AbstractWorldMap implements WorldMap {
     protected ArrayList<MapChangeListener> observers = new ArrayList<>();
     protected Boundary bounds;
     protected Map<Vector2d, Animal> animal_map;
+    protected int id;
 
-    AbstractWorldMap(Vector2d botLeft, Vector2d topRight) {
+    AbstractWorldMap(Vector2d botLeft, Vector2d topRight, int id) {
+        this.id = id;
         bounds = new Boundary(botLeft, topRight);
         animal_map = new HashMap<>();
     }
@@ -66,6 +68,10 @@ abstract class AbstractWorldMap implements WorldMap {
 
     public void unregisterObserver(MapChangeListener observer) {
         this.observers.remove(observer);
+    }
+
+    public int getId() {
+        return this.id;
     }
 
     public void mapChanged(String message) {

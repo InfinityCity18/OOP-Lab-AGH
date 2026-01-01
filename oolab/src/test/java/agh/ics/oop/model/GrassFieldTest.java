@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class GrassFieldTest {
     @Test
     void placeTest() {
-        GrassField map = new GrassField(10);;
+        GrassField map = new GrassField(10,1);
         Vector2d pos = new Vector2d(2,3);
         try {
             map.place(new Animal(pos)); //musi sie udac, miejsce jest wolne
@@ -20,7 +20,7 @@ public class GrassFieldTest {
 
     @Test
     void moveTest() {
-        GrassField map = new GrassField(10);;
+        GrassField map = new GrassField(10,1);
         Vector2d pos = new Vector2d(2,3);
         Vector2d pos2 = new Vector2d(2,4);
         Animal animal = new Animal(pos);
@@ -35,13 +35,13 @@ public class GrassFieldTest {
 
     @Test
     void objectAtTest() {
-        GrassField map = new GrassField(10);
+        GrassField map = new GrassField(10, 1);
         assertEquals(map.objectAt(new Vector2d(2,3)), null);
     }
 
     @Test
     void canMoveToTest() {
-        RectangularMap map = new RectangularMap(6,6);;
+        RectangularMap map = new RectangularMap(6,6, 1);;
         Vector2d pos = new Vector2d(2,3);
         Animal animal = new Animal(pos);
         try {
