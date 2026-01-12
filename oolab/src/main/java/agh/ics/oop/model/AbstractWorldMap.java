@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-abstract class AbstractWorldMap implements WorldMap {
+public abstract class AbstractWorldMap implements WorldMap {
     protected ArrayList<MapChangeListener> observers = new ArrayList<>();
     protected Boundary bounds;
     protected Map<Vector2d, Animal> animal_map;
@@ -48,6 +48,7 @@ abstract class AbstractWorldMap implements WorldMap {
         return new ArrayList<>(this.animal_map.values());
     }
 
+    @Override
     public Boundary getCurrentBounds() {
         return this.bounds;
     }

@@ -43,6 +43,11 @@ public class Simulation implements Runnable {
         int counter = 0;
 
         for (MoveDirection move: this.moves) {
+            try {
+                Thread.sleep(400);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             if (animals.isEmpty()) {
                 break;
             }
