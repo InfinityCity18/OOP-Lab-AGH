@@ -1,0 +1,1 @@
+class IncorrectPositionException(pos: Vector2d?) : Exception("Position " + pos + "is not correct.")
